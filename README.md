@@ -36,3 +36,7 @@ If YouTube changes the response format, the modal shows "Found no notifications 
 ## License
 
 [MIT](LICENSE)
+
+## Security
+
+Uses no imports and sends no data anywhere. This simply fetches data from youtube and builds the ui panel inside the webpage for you.
