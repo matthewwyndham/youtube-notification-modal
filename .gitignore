@@ -1,0 +1,5 @@
+# Raw YouTube responses and network captures hold personal notification data.
+debug*.json
+*.har
+
+.DS_Store
