@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         YouTube Notifications Modal
 // @namespace    https://github.com/matthewwyndham
-// @version      0.2.0
+// @version      0.2.1
 // @description  Shows your YouTube notifications in a large modal grid, with infinite scroll, "load all" and a filter.
 // @homepageURL  https://github.com/matthewwyndham/youtube-notification-modal
 // @supportURL   https://github.com/matthewwyndham/youtube-notification-modal/issues
@@ -614,12 +614,13 @@
   `;
   document.head.append(h('style', { id: 'ytnm-style', textContent: css }));
 
-  // The masthead renders after document-idle on a cold load, and SPA navigation can re-stamp it.
-  let tries = 0;
-  const timer = setInterval(() => {
-    if (injectButton() || ++tries > 40) clearInterval(timer);
-  }, 500);
-  document.addEventListener('yt-navigate-finish', injectButton);
+  // The masthead can render after document-idle, and YouTube re-renders its buttons after an
+  // in-page navigation, which removes ours. That re-render lands after yt-navigate-finish, so
+  // watch the DOM and put the button back whenever it is missing.
+  injectButton();
+  new MutationObserver(() => {
+    if (!document.getElementById('ytnm-open')) injectButton();
+  }).observe(document.documentElement, { childList: true, subtree: true });
 
   window.ytnm = { open, close, parsePage, get state() { return state; } };
 })();
