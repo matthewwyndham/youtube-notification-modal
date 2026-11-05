@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         YouTube Notifications Modal
 // @namespace    https://github.com/matthewwyndham
-// @version      0.2.1
+// @version      0.2.2
 // @description  Shows your YouTube notifications in a large modal grid, with infinite scroll, "load all" and a filter.
 // @homepageURL  https://github.com/matthewwyndham/youtube-notification-modal
 // @supportURL   https://github.com/matthewwyndham/youtube-notification-modal/issues
@@ -430,7 +430,6 @@
       'div',
       { class: 'ytnm-thumb' },
       it.thumb && h('img', { src: it.thumb, loading: 'lazy', alt: '' }),
-      unread && h('span', { class: 'ytnm-dot', title: 'Unread' }),
     );
     const meta = h(
       'div',
@@ -588,9 +587,9 @@
       border-radius: 8px; background: var(--ytnm-card);
     }
     .ytnm-thumb img { display: block; width: 100%; height: 100%; object-fit: cover; }
-    .ytnm-dot {
-      position: absolute; top: 8px; left: 8px; width: 10px; height: 10px; border-radius: 50%;
-      background: var(--ytnm-accent); box-shadow: 0 0 0 2px var(--ytnm-bg);
+    .ytnm-unread .ytnm-thumb::after {
+      content: ""; position: absolute; inset: 0; pointer-events: none;
+      border: 3px solid var(--ytnm-accent); border-radius: inherit;
     }
     .ytnm-meta { display: flex; align-items: flex-start; gap: 10px; }
     .ytnm-avatar { flex: none; width: 32px; height: 32px; border-radius: 50%; object-fit: cover; background: var(--ytnm-card); }
