@@ -8,7 +8,13 @@ A Tampermonkey userscript that opens your YouTube notifications in a large modal
 2. Open [the raw script](https://raw.githubusercontent.com/matthewwyndham/youtube-notification-modal/main/youtube-notifications-modal.user.js). Tampermonkey shows an install page; click **Install**.
 3. Reload YouTube.
 
-Tampermonkey checks the same URL for new versions.
+## Updates
+
+Tampermonkey checks the same URL for a new version once a day, and installs it when its `@version` is higher than the installed one. To update sooner, open the Tampermonkey menu and click **Check for userscript updates**.
+
+GitHub caches the raw file for up to 5 minutes. So for a few minutes after a push, the link can still serve the previous version. A hard refresh (Cmd+Shift+R, or Ctrl+Shift+R) after that window fetches the new one.
+
+When you change the script, raise `@version` in its header. Without that, Tampermonkey does not install the change.
 
 ## Use
 
